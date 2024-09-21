@@ -14,6 +14,12 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+enum role {
+  Administrador
+  Vendedor
+  Cliente
+}
+
 
 model user {
   id                    String @id @default(uuid())
@@ -56,9 +62,9 @@ model design {
   name                  String
   product_id            String
   product               product @relation(fields: [product_id], references: [id])
-  images                tag[]
+  images                String[]
   file                  String
-  tags                  String[]
+  tags                  tag[]
   created_at            DateTime @default(now())
   updated_at            DateTime @updatedAt
   created_by_id         String
@@ -68,6 +74,6 @@ model design {
 
 model tag {
   id                  String @id @default(uuid())
-  designs             design[]
   text                String
+  designs             design[]
 }
